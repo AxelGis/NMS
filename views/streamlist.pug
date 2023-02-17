@@ -1,0 +1,21 @@
+extends layout
+
+block content
+	h1= 'SR Solutions streams:'
+	ul(id="streams")
+	script.
+		fetch('https://tv.bot-adviser.com/streams')
+		.then(res => res.json())
+		.then(out => {
+			if(out.live !== undefined){
+				let ul = document.getElementById("streams");
+				Object.keys(out.live).map((stream)=>{
+					let li = document.createElement('li');
+					let a = document.createElement('a');
+					a.setAttribute('href', 'https://tv.bot-adviser.com/streams/'+stream);
+					a.innerHTML = stream;
+					li.appendChild(a)
+					ul.appendChild(li)
+				});		
+			}
+		});

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+	video(id="videoElement",muted="muted",controls)
+	script.
+		if (flvjs.isSupported()) {
+			var videoElement = document.getElementById('videoElement');
+			var flvPlayer = flvjs.createPlayer({
+				type: 'flv',
+				url: 'https://tv.bot-adviser.com:8443/live/#{stream}.flv'
+			});
+			flvPlayer.attachMediaElement(videoElement);
+			flvPlayer.load();
+			flvPlayer.play();
+		}
